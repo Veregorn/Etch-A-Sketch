@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Etch A Sketch</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="index.css">
+<body>
+    <div id="header">
+        <h1>Etch A Sketch</h1>
+        <button>Start</button>
+    </div>
+    <div id="container">
+    </div>
+</body>
+<script>
+    const btn = document.querySelector('button');
+    btn.onclick = function() {
+        // Ask user for the number of squares per side
+        var num = prompt("How many squares per side do you want to paint on? (Max: 100)",48);
+
+        // Configure some const
+        const totalSquares = num * num;
+        const pixelsPerSquare = 960 / num;
+
+        // Select the container div
+        const container = document.querySelector('#container');
+        
+        // Refresh canvas
+        container.innerHTML = "";
+
+        // Change styles in 'container'
+        document.getElementById('container').style.gridTemplateColumns = `repeat(${num}, ${pixelsPerSquare}px)`;
+        document.getElementById('container').style.gridTemplateRows = `repeat(${num}, ${pixelsPerSquare}px)`;
+
+        // Create the canvas
+        for (let i = 0; i < (totalSquares); i++) {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            square.style.width = `${pixelsPerSquare}px`;
+            square.style.height = `${pixelsPerSquare}px`;
+            container.appendChild(square);
+        }
+
+        // Add an event listener to each 'square' adding a new class when hovered
+        const squares = document.querySelectorAll('.square');
+        squares.forEach((square) => {
+            square.addEventListener('mouseenter', () => {
+                square.classList.add('square-hovered');
+            });
+        });
+    }
+</script>
+</html>
