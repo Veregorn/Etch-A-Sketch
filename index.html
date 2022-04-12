@@ -13,6 +13,11 @@
     </div>
 </body>
 <script>
+    // Function that generates an aleatory hexadecimal RGB value
+    function generateRGBValue() {
+        return Math.floor(Math.random()*16777215).toString(16);
+    }
+
     const btn = document.querySelector('button');
     btn.onclick = function() {
         // Ask user for the number of squares per side
@@ -46,6 +51,7 @@
         squares.forEach((square) => {
             square.addEventListener('mouseenter', () => {
                 square.classList.add('square-hovered');
+                square.style.backgroundColor = "#" + generateRGBValue();
             });
         });
     }
