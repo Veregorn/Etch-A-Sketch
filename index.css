@@ -26,3 +26,17 @@ h1 {
 .square-hovered {
     /*background-color: rgb(255, 255, 255);*/
 }
+
+button {
+    background-color: gold;
+    color: #FFFFFF;
+    border: none;
+    padding: 20px 50px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+button:hover {
+    background-color: goldenrod;
+}
