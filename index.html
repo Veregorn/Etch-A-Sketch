@@ -7,6 +7,7 @@
 <body>
     <div id="header">
         <h1>Etch A Sketch</h1>
+        <p>Click mouse button and move it to paint. On each hover color goes darker by 10%</p>
         <button>Start</button>
     </div>
     <div id="container">
@@ -96,6 +97,17 @@
         return (`rgb(${returnArray.join()}) `);
     }
 
+    // Global variable that say us if user is pressing a mouse button
+    let mouseDown = false;
+    
+    window.addEventListener('mousedown', function(event) {
+        mouseDown = true;
+    });
+
+    window.addEventListener('mouseup', function(event) {
+        mouseDown = false;
+    });
+
     const btn = document.querySelector('button');
     btn.onclick = function() {
         // Ask user for the number of squares per side
@@ -128,11 +140,11 @@
         const squares = document.querySelectorAll('.square');
         squares.forEach((square) => {
             square.addEventListener('mouseenter', () => {
-                if (square.classList.contains('square-hovered')) {
-                    var oldColor = rgbToHex(square.style.backgroundColor);
-                    var newColor = rgbToHex(darkenByTenth(hexToRgb(oldColor)));
+                if (square.classList.contains('square-hovered') && mouseDown) { // If mouse button is pressed color change
+                    let oldColor = rgbToHex(square.style.backgroundColor);
+                    let newColor = rgbToHex(darkenByTenth(hexToRgb(oldColor)));
                     square.style.backgroundColor = newColor;
-                } else {
+                } else if (mouseDown) { // If mouse button is pressed color change
                     square.classList.add('square-hovered');
                     square.style.backgroundColor = "#" + generateRGBValue();
                 }
